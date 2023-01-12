@@ -2,6 +2,7 @@ import * as React from "react"
 import { useState } from "react";
 import { Todo } from "./item";
 import { Item } from "../interfaces/item";
+import "../css/todoList.css"
 
 export interface TodoListProps {
     items: Item[];
@@ -43,8 +44,13 @@ const TodoList = (props: TodoListProps) => {
         {props.items.length > 0 &&
             <div>{itemList}</div>
         }
-        <input value={newTodoText} onChange={e => updateText(e)}></input>
-        <button onClick={addItem}>Add Todo</button>
+        <div className="AddTodoDiv">
+          <div className="inputBorder">
+            <input className="dataInput" value={newTodoText} onChange={e => updateText(e)}></input>
+            <button className="addButton" onClick={addItem} style={{color: props.items.length > 19 ? "grey" : "black"}}>Add Todo</button>
+          </div>
+        </div>
+        <div className="whiteSpace"></div>
     </div>
   )
 }

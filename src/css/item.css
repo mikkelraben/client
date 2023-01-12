@@ -1,0 +1,36 @@
+.item{
+    max-width: 20%;
+    border: 1px;
+    border-color: gainsboro;
+    border-radius: 8px;
+    border-style: solid;
+    padding: 20px;
+    margin: auto;
+    margin-top: 20px;
+    justify-content: center;
+    background-color: rgb(243, 249, 255);
+    position: relative;
+}
+
+.itemButton{
+    height: 32px;
+    width: 32px;
+    font-family: 'Roboto Mono', monospace;
+    color: brown;
+    background-color: rgba(128, 128, 128, 0.15);
+    border-radius: 20%;
+    border: 1px;
+    border-color: rgb(172, 172, 172);
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.itemCheckbox{
+    height: 32px;
+    width: 32px;
+    margin: 0;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}

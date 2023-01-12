@@ -38,36 +38,36 @@ function App() {
   async function deleteTodo(item: Item) {
 
 
-    await axios.delete(database+item.id,item).then(response => {
-      if(response.status === 204){
-        const indexToRemove:number = todos.indexOf(item);
-        
-        const newTodos:Array<Item> = todos.filter((next,index) => index !== indexToRemove);
-        setTodos(newTodos);
-      }else{
-        console.log(response.statusText);
-      }
+  await axios.delete(database+item.id,item).then(response => {
+    if(response.status === 204){
+      const indexToRemove:number = todos.indexOf(item);
+      
+      const newTodos:Array<Item> = todos.filter((next,index) => index !== indexToRemove);
+      setTodos(newTodos);
+    }else{
+      console.log(response.statusText);
+    }
 
     }).catch(error => console.log(error));
   }
 
   async function changeTodo(item: Item) {
     const newTodos = todos.map((todo) => {
-      //for each todo check if it is THE ONE and set the done accordingly
-      if(todo === item){
-        todo.done = !todo.done;
-      }
-      return todo;
-    });
+    //for each todo check if it is THE ONE and set the done accordingly
+    if(todo === item){
+      todo.done = !todo.done;
+    }
+    return todo;
+  });
 
-    await axios.put(database+item.id,item).then(response => {
-      if(response.status === 204){
-        setTodos(newTodos);
-      }else{
-        console.log(response.statusText);
-      }
+  await axios.put(database+item.id,item).then(response => {
+    if(response.status === 204){
+      setTodos(newTodos);
+    }else{
+      console.log(response.statusText);
+    }
 
-    }).catch(error => console.log(error));
+  }).catch(error => console.log(error));
   }
 
   //fetches appointments from the server

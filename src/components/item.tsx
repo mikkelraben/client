@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Item } from "../interfaces/item";
+import "../css/item.css"
 
 export interface TodoProps {
   item: Item;
@@ -19,10 +20,10 @@ export const Todo: React.FC<TodoProps> = props => {
     }
 
     return (
-      <div>
-        <p style={{ color: props.item.done ? "green" : "black" }}>{props.item.data}</p>
-        <input type = "checkbox" checked={props.item.done} onClick={toggleDone} readOnly={true}></input>
-        <button onClick={deleteItem}>X</button>
+      <div className="item">
+        <p style={{ textDecoration: props.item.done ? "line-through 2px" : "none" }}>{props.item.data}</p>
+        <input className="itemCheckbox" type = "checkbox" checked={props.item.done} onClick={toggleDone} readOnly={true}></input>
+        <button className="itemButton" onClick={deleteItem}>X</button>
       </div>
     );
 };
