@@ -1,52 +1,40 @@
 import * as React from "react"
+import { useState } from "react";
 import { Todo } from "./item";
 import { Item } from "../interfaces/item";
 
 export interface TodoListProps {
     items: Item[];
     setItems: React.Dispatch<React.SetStateAction<Item[]>>;
+    addTodo: (item: Item) => void;
+    deleteTodo: (item: Item) => void;
+    changeTodo: (item: Item) => void;
 }
 
 const TodoList = (props: TodoListProps) => {
+  const [newTodoText, setNewTodoText] = useState<string>("Type something");
+
     const addItem = () => {
-        const newTodo = {data:"Write Some Text", done: false};
-        props.setItems([...props.items,newTodo])
+        const newTodo:Item = {id: "noID",data:newTodoText, done: false};
+        props.addTodo(newTodo);
     }
 
     const toggleCheck = (item: Item) => {
-        const newTodos = props.items.map((todo) => {
-            //for each todo check if it is THE ONE and set the done accordingly
-            if(todo === item){
-              todo.done = !todo.done;
-            }
-            return todo;
-          });
-          props.setItems(newTodos);
+      props.changeTodo(item);
     }
 
-    const updateText = (item: Item, text: string) => {
-        const newTodos = props.items.map((todo) => {
-            //for each todo check if it is THE ONE and set the done accordingly
-            if(todo === item){
-              todo.data = text;
-            }
-            return todo;
-          });
-          props.setItems(newTodos);
+    const updateText = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setNewTodoText(e.target.value);
     }
-
 
     const deleteItem = (item: Item) => {
-        const indexToRemove:number = props.items.indexOf(item);
-        
-        const newTodos:Array<Item> = props.items.filter((next,index) => index != indexToRemove);
-        props.setItems(newTodos);
+      props.deleteTodo(item);
     }
 
     
     
     const itemList = props.items.map((item) => (
-        <Todo key={props.items.indexOf(item)} item={item} items={props.items} setItems={props.setItems} deleteItem={deleteItem} toggleCheck={toggleCheck} updateText={updateText}/>
+        <Todo key={props.items.indexOf(item)} item={item} items={props.items} setItems={props.setItems} deleteItem={deleteItem} toggleCheck={toggleCheck}/>
     ))
 
   return (
@@ -55,7 +43,7 @@ const TodoList = (props: TodoListProps) => {
         {props.items.length > 0 &&
             <div>{itemList}</div>
         }
-        
+        <input value={newTodoText} onChange={e => updateText(e)}></input>
         <button onClick={addItem}>Add Todo</button>
     </div>
   )

@@ -1,7 +1,9 @@
 export class Item{
+    public id:   string;
     public data: string;
     public done: boolean;
-    constructor(data: string,done: boolean){
+    constructor( id: string, data: string, done: boolean){
+        this.id = id;
         this.data = data;
         this.done = done;
     }
